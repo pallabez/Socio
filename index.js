@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -9,6 +10,7 @@ app.use(expressLayouts);        //use it before routes
 app.set('layout extractStyles', true);  //extract style and scripts from sub pages into the layout
 app.set('layout extractScripts', true);
 
+app.use(cookieParser());
 app.use(express.urlencoded()); 
 app.use('/', require('./routes/index'));        //'./routes' by deafult fetches index
 
