@@ -12,13 +12,13 @@ module.exports.post = function(req, res) {
 }
 
 module.exports.signUp = function(req, res) {
-    return res.render('user-sign-up', {
+    return res.render('user_sign_up', {
         title: "Sign Up!",
     });
 }
 
 module.exports.signIn = function(req, res) {
-    return res.render('user-sign-in', {
+    return res.render('user_sign_in', {
         title: "Sign in!",
     });
 }
@@ -28,7 +28,6 @@ module.exports.create = function(req, res) {
         console.log("Password didn't match.")
         return res.redirect('back');
     }
-
     User.findOne({username: req.body.username}, function(err, user) {
         if(err) {
             console.log(`Error in finding user in sign up ${err}`);
