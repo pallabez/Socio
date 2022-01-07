@@ -26,8 +26,8 @@ app.set('views', './views')
 app.use(session({
     name: 'socio',
     secret: 'blahsomething',         //Change the secret key before deployment
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: false,   //When login is not initialized, don't save extra data.
+    resave: false,              //When is session established, don't save data if it's not changed
     cookie: {
         maxAge: (1000 * 60 * 100) 
     }
@@ -35,6 +35,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser); //checks if session cookie is present or not
 
 //use express router
 app.use('/', require('./routes/index'));      
