@@ -4,6 +4,7 @@ const User = require('../models/user');
 module.exports.profile = function(req, res) {
     return res.render('user_profile', {
         title: "Profile",
+        user: req.user,
     });
 }
 
@@ -12,12 +13,20 @@ module.exports.post = function(req, res) {
 }
 
 module.exports.signUp = function(req, res) {
+    if(req.isAuthenticated()) {
+        return res.redirect('/user/profile');
+    }
+
     return res.render('user_sign_up', {
         title: "Sign Up!",
     });
 }
 
 module.exports.signIn = function(req, res) {
+    if(req.isAuthenticated()) {
+        return res.redirect('/user/profile');
+    }
+
     return res.render('user_sign_in', {
         title: "Sign in!",
     });
