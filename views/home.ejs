@@ -1,5 +1,12 @@
 <h1>Socio / <%= title %></h1>
 
+<% for(let post of  posts) { %>
+    <li>
+        <%= post.content %> 
+        <%= post.user.username %> 
+    </li>
+<% } %>
+
 <section id="feed-posts">
     <h3>Posts</h3>
     <form action="/post/create" id="new-post-form" method="POST">
