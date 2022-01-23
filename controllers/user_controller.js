@@ -8,10 +8,6 @@ module.exports.profile = function(req, res) {
     });
 }
 
-module.exports.post = function(req, res) {
-    return res.end("<h1>User Posts</h1>")
-}
-
 module.exports.signUp = function(req, res) {
     if(req.isAuthenticated()) {
         return res.redirect('/user/profile');
