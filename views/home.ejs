@@ -7,6 +7,7 @@
     </li>
 <% } %>
 
+<% if(locals.user) {%>
 <section id="feed-posts">
     <h3>Posts</h3>
     <form action="/post/create" id="new-post-form" method="POST">
@@ -14,3 +15,4 @@
         <input type="submit" value="Post">
     </form>
 </section>
+<% } %>

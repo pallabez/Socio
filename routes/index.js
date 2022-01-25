@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const homeController = require('../controllers/home_controller');
 
-router.get('/', passport.checkAuthentication, homeController.home);
+router.get('/', homeController.home);
 router.use('/user', require('./user'));
 router.use('/post', require('./post'));
 
