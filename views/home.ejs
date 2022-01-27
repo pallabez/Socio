@@ -1,39 +1,6 @@
 <h1>Socio / <%= title %></h1>
 
-<% for(let post of posts) { %>
-    <li>
-        <% if(locals.user && locals.user.id == post.user.id) { %>
-            <a href="/post/destroy/<%= post.id %>">X</a>
-        <% } %>
-
-        <%= post.content %> -
-        <%= post.user.username %>
-        <div class="post-comments">
-            <% if(locals.user) { %>
-                <form action="/comment/create" method="POST">
-                    <input type="text" name="content" required>
-                    <input type="hidden" name="post" value="<%= post._id%>">
-                    <input type="submit" value="Reply">
-                </form>
-            <% } %>
-
-            <div class="post-comment-list">
-                <ul id="post-comment-<%= post._id%>">
-                    <% for(i of post.comment) { %>
-                        <li>
-                            <% if(locals.user && locals.user.id == i.user.id) { %>
-                                <a href="/comment/destroy/<%= i.id %>">X</a>
-                            <% } %>
-                            <%= i.content %> - 
-                            <%= i.user.username %>
-                        </li>
-                    <% } %>
-                </ul>
-            </div>
-
-        </div>
-    </li>
-<% } %>
+<%- include('_post'); %>
 
 <% if(locals.user) {%>
 <section id="feed-posts">
