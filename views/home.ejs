@@ -1,6 +1,6 @@
 <h1>Socio / <%= title %></h1>
 
-<%- include('_post'); %>
+<%- include('_post', {posts: posts}); -%>
 
 <% if(locals.user) {%>
 <section id="feed-posts">

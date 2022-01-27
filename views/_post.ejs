@@ -18,13 +18,7 @@
             <div class="post-comment-list">
                 <ul id="post-comment-<%= post._id%>">
                     <% for(i of post.comment) { %>
-                        <li>
-                            <% if(locals.user && locals.user.id == i.user.id) { %>
-                                <a href="/comment/destroy/<%= i.id %>">X</a>
-                            <% } %>
-                            <%= i.content %> - 
-                            <%= i.user.username %>
-                        </li>
+                        <%- include('_comment', {i: i}) %>
                     <% } %>
                 </ul>
             </div>
