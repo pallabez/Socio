@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 <h1>Socio / User / <%= title %></h1>
 
-<div>Name: <%= user.username %></div>
-<div>Email: <%= user.email %></div>
+<% if(locals.user.id == profileUser.id) { %>
+    <form action="/user/update/<%= profileUser.id %>" method="post">
+        <input type="text" name="name" placeholder="Your Name" value="<%= profileUser.name %>" required>
+        <input type="email" name="email" placeholder="Your Email" value="<%= profileUser.email %>" required>
+        <input type="submit" value="Update">
+    </form>
+<% } else { %>
+    <div>Name: <%= profileUser.username %></div>
+    <div>Email: <%= profileUser.email %></div>
+<% } %>
