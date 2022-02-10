@@ -78,6 +78,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.createSession = function(req, res) {
     try {
+        req.flash('success', 'Logged in Successfully');
         return res.redirect('/');
     } catch(err) {
         console.log('Error in creating session', err);
@@ -88,6 +89,7 @@ module.exports.createSession = function(req, res) {
 module.exports.destroySession = function(req, res) {
     try {
         req.logout();           //by passport
+        req.flash('success', 'You have logged out!');
         return res.redirect('/');
     } catch(err) {
         console.log('Error in destroying session', err);
