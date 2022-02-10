@@ -2,21 +2,22 @@ const db = require('../config/mongoose');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 
-module.exports.create = function(req, res) {
-    Post.create({
-        content: req.body.content,
-        user: req.user._id
-    }, function(err, newPost) {
-        if(err) {
-            console.log("Error in creating post.");
-            return;
-        }
+module.exports.create = async (req, res) => {
+    try {
+        await Post.create({
+            content: req.body.content,
+            user: req.user._id
+        }); 
         return res.redirect('back');
-    });
+    } catch(err) {
+        console.log('Error in creating post', err);
+        return;
+    }
 }
 
-module.exports.destroy = function(req, res) {
-    Post.findById(req.params.id, function(err, post) {
+module.exports.destroy = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
         //.id means converting the object id to string
         if(post.user == req.user.id) {
             post.remove();
@@ -26,5 +27,8 @@ module.exports.destroy = function(req, res) {
         } else {
             return res.redirect('back');
         }
-    });
+    } catch(err) {
+        console.log('Error in destroying post', err);
+        return;
+    }
 }
