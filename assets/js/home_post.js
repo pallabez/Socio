@@ -12,7 +12,7 @@
           console.log(data);
           let newPost = newPostDom(data.data);
           $('#post-list-container').prepend(newPost);
-          deletePost($(' .delete-post-button', newPost));
+          deletePostEventHandler($(' .delete-post-button', newPost));
         }, error: function(error) {
           console.log(error.responseText);
         }
@@ -42,10 +42,10 @@
         </div>
       </div>
       </li>
-  `)}
+    `)}
 
   // Method to delete a post from DOM
-  let deletePost = (deleteLink) => {
+  let deletePostEventHandler = (deleteLink) => {
     $(deleteLink).click(function(e) {
       e.preventDefault();
 
@@ -59,6 +59,10 @@
         }
       })
     })
+  }
+  let deletePostBtns = $('.delete-post-button')
+  for(let element of deletePostBtns) {
+    deletePostEventHandler(element);
   }
   createPost();
 }
