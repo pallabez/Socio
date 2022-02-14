@@ -1,6 +1,7 @@
 const db = require('../config/mongoose');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const { localsName } = require('ejs');
 
 module.exports.create = async (req, res) => {
     try {
@@ -8,11 +9,12 @@ module.exports.create = async (req, res) => {
             content: req.body.content,
             user: req.user._id
         }); 
-
+        console.log(req.user)
         if(req.xhr) {
             return res.status(200).json({
                 data: {
-                    posts: post
+                    post: post,
+                    username: req.user.username
                 }, 
                 message: "Post Created"
             })

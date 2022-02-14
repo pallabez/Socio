@@ -10,7 +10,7 @@
         data: newPostForm.serialize(),
         success: function(data) {
           console.log(data);
-          let newPost = newPostDom(data.data.posts);
+          let newPost = newPostDom(data.data);
           $('#post-list-container').prepend(newPost);
           deletePost($(' .delete-post-button', newPost));
         }, error: function(error) {
@@ -21,23 +21,23 @@
   }
 
   // Method to create a post in DOM
-  let newPostDom = (post) => {
+  let newPostDom = (data) => {
     return $(`
-      <li id="post-${post._id}">
-      <a class="delete-post-button" href="/post/destroy/${post._id}">X</a>
+      <li id="post-${data.post._id}">
+      <a class="delete-post-button" href="/post/destroy/${data.post._id}">X</a>
 
-      ${post.content} -
-      ${post.user.username}
+      ${data.post.content} -
+      ${data.username}
 
       <div class="post-comments">
         <form action="/comment/create" method="POST">
           <input type="text" name="content" required>
-          <input type="hidden" name="post" value="${post._id}">
+          <input type="hidden" name="post" value="${data.post._id}">
           <input type="submit" value="Reply">
         </form>
       
         <div class="post-comment-list">
-            <ul id="post-comment-${post._id}">
+            <ul id="post-comment-${data.post._id}">
             </ul>
         </div>
       </div>
